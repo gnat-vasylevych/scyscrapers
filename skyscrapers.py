@@ -132,10 +132,14 @@ def check_skyscrapers(input_path: str):
     Return True if the board status is compliant with the rules,
     False otherwise.
 
-    # >>> check_skyscrapers("check.txt")
-    True
     """
-    pass
+    board = read_input(input_path)
+    if check_not_finished_board(board):
+        if check_uniqueness_in_rows(board):
+            if check_horizontal_visibility(board):
+                if check_columns(board):
+                    return True
+    return False
 
 
 if __name__ == "__main__":
