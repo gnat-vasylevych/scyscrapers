@@ -93,7 +93,14 @@ def check_horizontal_visibility(board: list):
     # >>> check_horizontal_visibility(['***21**', '452413*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***'])
     False
     """
-    pass
+    for line in board[1:-1]:
+        if line[0] != '*':
+            if not left_to_right_check(line, int(line[0])):
+                return False
+        if line[-1] != '*':
+            if not left_to_right_check(line[::-1], int(line[-1])):
+                return False
+    return True
 
 
 def check_columns(board: list):
@@ -109,7 +116,14 @@ def check_columns(board: list):
     # >>> check_columns(['***21**', '412553*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***'])
     False
     """
-    pass
+    inverse_board = []
+    for index in range(7):
+        temp = ""
+        for line in board:
+            temp += line[index]
+        inverse_board.append(temp)
+
+    return check_uniqueness_in_rows(inverse_board) and check_horizontal_visibility(inverse_board)
 
 
 def check_skyscrapers(input_path: str):
