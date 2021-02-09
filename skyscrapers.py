@@ -26,7 +26,15 @@ def left_to_right_check(input_line: str, pivot: int):
     >>> left_to_right_check("452453*", 5)
     False
     """
-    pass
+    check = 0
+    temp = 0
+    for number in input_line[1:-1]:
+        if int(number) > temp:
+            check += 1
+            temp = int(number)
+    if check >= pivot:
+        return True
+    return False
 
 
 def check_not_finished_board(board: list):
